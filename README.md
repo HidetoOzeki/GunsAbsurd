@@ -1,3 +1,2 @@
-#GunsAbsurd ガンズ・アブサード
-
+# GunsAbsurd ガンズ・アブサード
 A game written in Java.

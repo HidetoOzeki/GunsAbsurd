@@ -1,4 +1,3 @@
-
 import java.io.*;
 import javax.swing.JFrame;
 import java.awt.image.BufferStrategy;

@@ -4,6 +4,10 @@ public class Screen {
 	int w,h;
 	int[] pixels;
 	
+	int ignore = 0;
+	int xoffset = 0;
+	int yoffset = 0;
+	
 	public Screen(int width,int height,int[] framebuffer){
 		w = width;
 		h = height;
@@ -23,6 +27,19 @@ public class Screen {
 		pixels[x+y*w] = col;
 	}
 	
+	public void render(int x,int y,int tx,int ty,Bitmap bmp){
+		for(int j = 0;j < 8;j++){
+			int py = y+j;
+			if(py < 0||py >= h)continue;
+			for(int i = 0;i < 8;i++){
+			int px = x+i;
+			if(px < 0||px >= w)continue;
+			int col = bmp.pixels[(tx+i)+(ty+j)*bmp.w];
+			if(col!=ignore)pixels[px+py*w] = col;
+			}
+		}
+	}
+	
 	public void render(int x,int y,Bitmap bmp){
 		for(int j = 0;j < bmp.h;j++){
 			int py = y+j;
@@ -30,7 +47,8 @@ public class Screen {
 			for(int i = 0;i < bmp.w;i++){
 			int px = x+i;
 			if(px < 0||px >= w)continue;
-			pixels[px+py*w] = bmp.pixels[i+j*bmp.w];
+			int col = bmp.pixels[i+j*bmp.w];
+			if(col!=ignore)pixels[px+py*w] = col;
 			}
 		}
 	}
@@ -47,83 +65,5 @@ public class Screen {
 			int py = Math.trunc(y0+ystep*i);
 			put(px,py,col);
 		}*/
-	}
-	
-		/*
-	
-	void polygon(Vec v1,Vec v2,Vec v3){
-		Vec temp;
-		
-		if(v1.y > v2.y){
-			temp = v2;
-			v2 = v1;
-			v1 = temp;
-		}
-		if(v1.y > v3.y){
-			temp = v3;
-			v3 = v1;
-			v1 = temp;
-		}
-		if(v2.y > v3.y){
-			temp = v3;
-			v3 = v2;
-			v2 = temp;
-		}
-		
-		float xl = v1.x;
-		float xr = v1.x;
-		
-		v1.round();
-		v2.round();
-		v3.round();
-		
-		if(v1.y==v2.y)v1.y--;
-		
-		float y13 = v3.y-v1.y;
-		
-		float a12 = (v2.x-v1.x)/(v2.y-v1.y);
-		float a13 = (v3.x-v1.x)/(v3.y-v1.y);
-		float a23 = (v3.x-v2.x)/(v3.y-v2.y);
-		
-		int color = 0xff00ff;
-		
-		if(a12 > a13){
-			
-			for(int y = (int)v1.y;y < (int)v2.y;y++){
-				for(int x = (int)xl;x < (int)xr;x++)putf(x,y,color);
-				xr+=a12;
-				xl+=a13;
-			}
-			for(int y = (int)v2.y;y < (int)v3.y;y++){
-				for(int x = (int)xl;x < (int)xr;x++)putf(x,y,color);
-				xr+=a23;
-				xl+=a13;
-			}
-			
-			
-		}else{
-			
-			for(int y = (int)v1.y;y < (int)v2.y;y++){
-				for(int x = (int)xl;x < (int)xr;x++)putf(x,y,color);
-				xl+=a12;
-				xr+=a13;
-			}
-			for(int y = (int)v2.y;y < (int)v3.y;y++){
-				for(int x = (int)xl;x < (int)xr;x++)putf(x,y,color);
-				xl+=a23;
-				xr+=a13;
-			}
-			
-		}
-		
-		putf(v1.x,v1.y,0xff0000);
-		putf(v2.x,v2.y,0x00ff00);
-		putf(v3.x,v3.y,0x0000ff);
-	}
-	
-	*/
-	
-	public int[] getData(){
-		return pixels;
 	}
 }

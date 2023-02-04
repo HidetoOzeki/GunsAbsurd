@@ -1,3 +1,4 @@
+package com.HidetoOzeki.games.gunsabsurd.Entity;
 public class Mob extends Entity {
 	
 	int life = 1000;

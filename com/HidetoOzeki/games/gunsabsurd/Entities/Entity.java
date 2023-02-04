@@ -1,3 +1,4 @@
+package com.HidetoOzeki.games.gunsabsurd.Entity;
 public class Entity{
 	public double x,y,vx,vy;
 	public Entity(){

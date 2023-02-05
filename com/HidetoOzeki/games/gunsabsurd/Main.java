@@ -16,17 +16,11 @@ import java.awt.PointerInfo;
 import java.awt.MouseInfo;
 import java.util.ArrayList;
 
-/*
-import Entities.*;
-import gfx.*;
-import Level.*;
-*/
-
 public class Main implements Runnable {
 	
 	public static int WIDTH = 320;
 	public static int HEIGHT = 240;
-	public static int SCALE = 1;
+	public static int SCALE = 2;
 	
 	int mouseX,mouseY;
 	
@@ -37,7 +31,7 @@ public class Main implements Runnable {
 	
 	int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 	
-	Screen screen = new Screen(WIDTH,HEIGHT,pixels);
+	Screen screen = new Screen(WIDTH,HEIGHT,image);
 	
 	SillyGuns game = new SillyGuns();
 	
@@ -80,7 +74,7 @@ public class Main implements Runnable {
 	@Override
 	public void run(){
 		
-		double ns = 1000.0/60.0;
+		double ms = 1000.0/60.0;
 		double delta = 0;
 		double last = System.currentTimeMillis();
 		int tps = 0;
@@ -88,7 +82,7 @@ public class Main implements Runnable {
 		long timer = System.currentTimeMillis();
 		while(true){
 			double now = System.currentTimeMillis();
-			delta += (now-last)/ns;
+			delta += (now-last)/ms;
 			last = now;
 			if(delta>=1){
 				tick();

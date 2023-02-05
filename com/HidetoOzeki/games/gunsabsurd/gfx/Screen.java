@@ -1,18 +1,24 @@
 package com.HidetoOzeki.games.gunsabsurd.gfx;
 import java.lang.Math;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 public class Screen {
 	
 	int w,h;
+
 	int[] pixels;
+	Graphics context;
 	
 	int ignore = 0;
 	int xoffset = 0;
 	int yoffset = 0;
 	
-	public Screen(int width,int height,int[] framebuffer){
+	public Screen(int width,int height,BufferedImage image){
 		w = width;
 		h = height;
-		pixels = framebuffer;
+		pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+		context = image.getGraphics();
 	}
 	
 	public void clear(int col){
@@ -75,4 +81,11 @@ public class Screen {
 			put(px,py,col);
 		}*/
 	}
+
+	public void drawtext(String text,int x,int y,int size){
+		context.drawString(text,x,y);
+	}
+
+	public int getWidth(){return w;}
+	public int getHeight(){return h;}
 }

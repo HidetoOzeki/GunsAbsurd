@@ -20,11 +20,11 @@ public class SillyGuns{
 			test=!test;
 		}
 		input.setkeystate(KeyEvent.VK_SPACE,false);
-		x++;
 	}
 	
 	public void render(Screen screen){
-		screen.clear(bgcol);
 		screen.render(x,0,title);
+		screen.drawtext("test",screen.getWidth()/2,screen.getHeight()-50,0);
+		screen.drawtext("テスト",screen.getWidth()/2,screen.getHeight()-30,0);
 	}
 }

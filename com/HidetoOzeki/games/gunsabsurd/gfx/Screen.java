@@ -1,8 +1,11 @@
 package com.HidetoOzeki.games.gunsabsurd.gfx;
 import java.lang.Math;
 import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.awt.GraphicsEnvironment;
 public class Screen {
 	
 	int w,h;
@@ -82,7 +85,21 @@ public class Screen {
 		}*/
 	}
 
-	public void drawtext(String text,int x,int y,int size){
+	public void outAvailableFont(){
+		System.out.println("available fonts are : ");
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		String[] fonts = ge.getAvailableFontFamilyNames();
+		for(String f : fonts){
+			System.out.println(f);
+		}
+	}
+
+	public void setFont(String f,boolean bold,int size){
+		context.setFont(new Font(f,bold ? Font.BOLD : Font.PLAIN,size));
+	}
+
+	public void drawtext(String text,int x,int y){
+		context.setColor(Color.white);
 		context.drawString(text,x,y);
 	}
 

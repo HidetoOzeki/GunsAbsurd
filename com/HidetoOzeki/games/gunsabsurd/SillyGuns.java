@@ -24,7 +24,13 @@ public class SillyGuns{
 	
 	public void render(Screen screen){
 		screen.render(x,0,title);
-		screen.drawtext("test",screen.getWidth()/2,screen.getHeight()-50,0);
-		screen.drawtext("ãƒ†ã‚¹ãƒˆ",screen.getWidth()/2,screen.getHeight()-30,0);
+		screen.setFont("Meiryo",false,16);
+		screen.drawtext("“ú–{ŒêƒeƒXƒg",0,screen.getHeight()-60);
+		screen.setFont("Meiryo",false,16);
+		screen.drawtext("test",screen.getWidth()/2,screen.getHeight()-60);
+		screen.setFont("Arial",true,16);
+		screen.drawtext("test",screen.getWidth()/2,screen.getHeight()-40);
+		screen.setFont("HGSoeiKakupoptai",false,16);
+		screen.drawtext("test",screen.getWidth()/2,screen.getHeight()-20);
 	}
 }

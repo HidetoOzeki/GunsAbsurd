@@ -3,6 +3,7 @@ import java.lang.Math;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.awt.GraphicsEnvironment;
@@ -16,6 +17,10 @@ public class Screen {
 	int ignore = 0;
 	int xoffset = 0;
 	int yoffset = 0;
+
+	int drawcolor = 0;
+	boolean centertext = false;
+	Font font;
 	
 	public Screen(int width,int height,BufferedImage image){
 		w = width;
@@ -85,6 +90,11 @@ public class Screen {
 		}*/
 	}
 
+	public void setDrawColor(int col){
+		this.drawcolor = col;
+		context.setColor(new Color(col));
+	}
+
 	public void outAvailableFont(){
 		System.out.println("available fonts are : ");
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -94,12 +104,17 @@ public class Screen {
 		}
 	}
 
-	public void setFont(String f,boolean bold,int size){
-		context.setFont(new Font(f,bold ? Font.BOLD : Font.PLAIN,size));
+	public void setFont(String f,boolean bold,boolean center,int size){
+		font = new Font(f,bold ? Font.BOLD : Font.PLAIN,size);
+		context.setFont(font);
+		centertext = center;
 	}
 
 	public void drawtext(String text,int x,int y){
-		context.setColor(Color.white);
+		if(centertext){
+			FontMetrics fm = context.getFontMetrics(font);
+			x-=fm.stringWidth(text)/2;
+		}
 		context.drawString(text,x,y);
 	}
 

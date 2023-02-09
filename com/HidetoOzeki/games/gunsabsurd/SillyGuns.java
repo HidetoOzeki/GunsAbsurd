@@ -8,6 +8,9 @@ public class SillyGuns{
 	int bgcol = 0x0000ff;
 	int x = 0;
 	Bitmap title = new Bitmap("res/title.png");
+	int gamemode_title =0;
+	int gamemode_game = 1;
+	int gamemode = gamemode_title;
 	public SillyGuns(){
 	}
 	
@@ -23,14 +26,27 @@ public class SillyGuns{
 	}
 	
 	public void render(Screen screen){
+		if(gamemode==gamemode_game){
+
+		}else if(gamemode==gamemode_title){
 		screen.render(x,0,title);
-		screen.setFont("Meiryo",false,16);
-		screen.drawtext("���{��e�X�g",0,screen.getHeight()-60);
-		screen.setFont("Meiryo",false,16);
-		screen.drawtext("test",screen.getWidth()/2,screen.getHeight()-60);
-		screen.setFont("Arial",true,16);
-		screen.drawtext("test",screen.getWidth()/2,screen.getHeight()-40);
-		screen.setFont("HGSoeiKakupoptai",false,16);
-		screen.drawtext("test",screen.getWidth()/2,screen.getHeight()-20);
+
+		screen.setDrawColor(0xff00ff);
+		screen.setFont("HGSoeiKakupoptai",false,true,16);
+		screen.drawtext("日本語テスト",screen.getWidth()/2,32);
+		screen.drawtext("閉じる",screen.getWidth()/2,32);
+		screen.setDrawColor(0x00ff00);
+		screen.setFont("HGSoeiKakupoptai",false,false,16);
+		screen.drawtext("日本語テスト",screen.getWidth()/2,32);
+		screen.drawtext("閉じる",screen.getWidth()/2,32);
+		screen.setDrawColor(0xff00ff);
+		screen.setFont("HGSoeiKakupoptai",false,true,16);
+		screen.drawtext("日本語テスト",screen.getWidth()/2,screen.getHeight()-40);
+		screen.drawtext("閉じる",screen.getWidth()/2,screen.getHeight()-20);
+		screen.setDrawColor(0x00ff00);
+		screen.setFont("HGSoeiKakupoptai",false,false,16);
+		screen.drawtext("日本語テスト",screen.getWidth()/2,screen.getHeight()-40);
+		screen.drawtext("閉じる",screen.getWidth()/2,screen.getHeight()-20);
+		}
 	}
 }

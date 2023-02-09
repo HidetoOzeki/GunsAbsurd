@@ -1,9 +1,9 @@
 MAIN = com/HidetoOzeki/games/gunsabsurd/Main.java
 
 default:
-	javac $(MAIN)
+	javac -encoding UTF-8 $(MAIN)
 	java $(MAIN)
 compile:
-	javac $(MAIN)
+	javac -encoding UTF-8 $(MAIN)
 run:
 	java $(MAIN)

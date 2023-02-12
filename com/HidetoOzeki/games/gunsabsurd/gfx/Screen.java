@@ -28,6 +28,11 @@ public class Screen {
 		pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 		context = image.getGraphics();
 	}
+
+	public void setOffset(int x,int y){
+		xoffset = x;
+		yoffset = y;
+	}
 	
 	public void clear(int col){
 		for(int i = 0;i < w*h;i++){
@@ -90,18 +95,29 @@ public class Screen {
 		}*/
 	}
 
+	public void rectangle(int x,int y,int sx,int sy){
+		x-=xoffset;
+		y-=yoffset;
+		for(int j = 0;j < sy;j++){
+			int py = y+j;
+			if(py < 0||py >= h)continue;
+			for(int i = 0;i < sx;i++){
+			int px = x+i;
+			if(px < 0||px >= w)continue;
+			pixels[px+py*w] = drawcolor;
+			}
+		}
+	}
+
 	public void setDrawColor(int col){
 		this.drawcolor = col;
 		context.setColor(new Color(col));
 	}
 
-	public void outAvailableFont(){
-		System.out.println("available fonts are : ");
+	public String[] getAvailableFont(){
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		String[] fonts = ge.getAvailableFontFamilyNames();
-		for(String f : fonts){
-			System.out.println(f);
-		}
+		return fonts;
 	}
 
 	public void setFont(String f,boolean bold,boolean center,int size){
@@ -110,7 +126,7 @@ public class Screen {
 		centertext = center;
 	}
 
-	public void drawtext(String text,int x,int y){
+	public void drawText(String text,int x,int y){
 		if(centertext){
 			FontMetrics fm = context.getFontMetrics(font);
 			x-=fm.stringWidth(text)/2;

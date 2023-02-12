@@ -24,6 +24,7 @@ public class Main implements Runnable {
 	
 	int mouseX,mouseY;
 	
+	boolean shutdown = false;
 	public JFrame window;
 	BufferStrategy str;
 	BufferedImage image = new BufferedImage(WIDTH,HEIGHT,1);
@@ -36,7 +37,7 @@ public class Main implements Runnable {
 	SillyGuns game = new SillyGuns();
 	
 	public Main(){
-		window = new JFrame("test window");
+		window = new JFrame("Guns Absurd");
 		window.setSize(WIDTH*SCALE,HEIGHT*SCALE);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
@@ -57,8 +58,7 @@ public class Main implements Runnable {
 		mouseY = (int)((MouseInfo.getPointerInfo().getLocation().getY()/SCALE)-window.getY()/SCALE);
 		
 		game.tick(mouseX,mouseY,input);
-		
-		if(input.getkeystate(KeyEvent.VK_SPACE));
+		shutdown = game.isShuttingDown();
 	}
 	
 	void render(){
@@ -80,7 +80,7 @@ public class Main implements Runnable {
 		int tps = 0;
 		int fps = 0;
 		long timer = System.currentTimeMillis();
-		while(true){
+		while(!shutdown){
 			double now = System.currentTimeMillis();
 			delta += (now-last)/ms;
 			last = now;
@@ -108,5 +108,6 @@ public class Main implements Runnable {
 	Main main = new Main();
 	main.init();
 	main.run();
+	System.exit(0);
 	}
 }

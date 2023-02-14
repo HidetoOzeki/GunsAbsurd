@@ -126,12 +126,17 @@ public class Screen {
 		centertext = center;
 	}
 
-	public void drawText(String text,int x,int y){
-		if(centertext){
-			FontMetrics fm = context.getFontMetrics(font);
-			x-=fm.stringWidth(text)/2;
+	public Font getFont(){
+		return font;
+	}
+
+	public void drawText(String t,int x,int y){
+		FontMetrics fm = context.getFontMetrics(font);
+		for(String text : t.split("\n")){
+		int offsetx = centertext ? fm.stringWidth(text)/2 : 0;
+		context.drawString(text,x-offsetx,y);
+		y+=fm.getHeight();
 		}
-		context.drawString(text,x,y);
 	}
 
 	public int getWidth(){return w;}

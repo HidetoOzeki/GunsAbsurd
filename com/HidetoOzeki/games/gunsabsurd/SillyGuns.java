@@ -2,6 +2,9 @@ package com.HidetoOzeki.games.gunsabsurd;
 import com.HidetoOzeki.games.gunsabsurd.gfx.Bitmap;
 import com.HidetoOzeki.games.gunsabsurd.gfx.Screen;
 import com.HidetoOzeki.games.gunsabsurd.InputHandler;
+import com.HidetoOzeki.games.gunsabsurd.Entities.Entity;
+import com.HidetoOzeki.games.gunsabsurd.Entities.Mob;
+import com.HidetoOzeki.games.gunsabsurd.Entities.Player;
 import java.awt.event.KeyEvent;
 import java.awt.Desktop;
 import java.net.URL;
@@ -24,6 +27,7 @@ public class SillyGuns{
 	String titletext = "";
 	boolean dispen = false;
 	boolean dispjp = false;
+	Player player = new Player();
 	public SillyGuns(){
 	}
 	
@@ -57,29 +61,48 @@ public class SillyGuns{
 		input.setkeystate(KeyEvent.VK_ENTER,false);
 		if(index < 0)index = options.length-1;
 		if(index > options.length-1)index = 0;
+		/*
 		if(fontnum < 0)fontnum = availablefonts.length-1;
 		if(fontnum > availablefonts.length-1)fontnum = 0;
 		titlefont = availablefonts[fontnum];
+		*/
+		player.update();
 	}
 	
 	public void render(Screen screen){
 		
 		if(availablefonts==null){
+			/*
 			availablefonts = screen.getAvailableFont();
 			titlefont = availablefonts[fontnum];
 			System.out.println("available font updated");
+			*/
+			titlefont = "";
 		}
 		if(gamemode==gamemode_game){
 
+			screen.clear(0x9999ff);
+
+			screen.setOffsetCenter((int)player.x,(int)player.y);
+			screen.setDrawColor(0x3333ff);
+			screen.rectangle(-100,0,100,10);
+			screen.setDrawColor(0xff3333);
+			screen.rectangle(0,0,100,10);
+
+			screen.drawText(""+(int)player.y,32,32);
+			player.render(screen);
 		}else if(gamemode==gamemode_title){
 			screen.clear(0);
-			//screen.render(0,-16,title);
 			screen.setDrawColor(0x888888);
+			/*
 			screen.setFont(titlefont,true,true,48);
 			dispen = screen.getFont().canDisplay('A');
 			dispjp = screen.getFont().canDisplay('あ');
 			titletext = dispjp ? titletexts[0] : titletexts[1];
 			if(!dispen&&!dispjp)screen.setFont("",true,true,48);
+			*/
+			titletext = titletexts[1];
+			screen.setFont("Meiryo",true,true,48);
 			screen.drawText(titletext,screen.getWidth()/2,screen.getHeight()/3);
 			screen.setDrawColor(0xffffff);
 			screen.drawText(titletext,-2+screen.getWidth()/2,-2+screen.getHeight()/3);

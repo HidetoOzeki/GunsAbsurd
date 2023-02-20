@@ -62,6 +62,11 @@ public class Main implements Runnable {
 	}
 	
 	void render(){
+
+		if(str==null){
+			System.out.println("BufferStrategy is null");
+		}
+
 		Graphics g = str.getDrawGraphics();
 		
 		game.render(screen);

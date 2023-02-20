@@ -10,6 +10,7 @@ import java.awt.GraphicsEnvironment;
 public class Screen {
 	
 	int w,h;
+	int screen_center_x,screen_center_y;
 
 	int[] pixels;
 	Graphics context;
@@ -27,11 +28,18 @@ public class Screen {
 		h = height;
 		pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 		context = image.getGraphics();
+		screen_center_x = w/2;
+		screen_center_y = h/2;
 	}
 
 	public void setOffset(int x,int y){
 		xoffset = x;
 		yoffset = y;
+	}
+
+	public void setOffsetCenter(int x,int y){
+		xoffset = x-screen_center_x;
+		yoffset = y-screen_center_y;
 	}
 	
 	public void clear(int col){

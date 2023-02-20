@@ -1,0 +1,1 @@
+java -cp bin com.HidetoOzeki.games.gunsabsurd.Main

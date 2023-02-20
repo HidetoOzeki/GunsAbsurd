@@ -1,8 +1,7 @@
-package com.HidetoOzeki.games.gunsabsurd.Entity;
+package com.HidetoOzeki.games.gunsabsurd.Entities;
+import com.HidetoOzeki.games.gunsabsurd.gfx.Screen;
 public class Entity{
 	public double x,y,vx,vy;
-	public Entity(){
-	}
 	
 	public Entity(double x,double y){
 		this.x = x;
@@ -12,5 +11,9 @@ public class Entity{
 	public void update(){
 		x+=vx;
 		y+=vy;
+	}
+
+	public void render(Screen screen){
+
 	}
 }

@@ -1,4 +1,4 @@
-package com/HidetoOzeki/games/gunsabsurd;
+package com.HidetoOzeki.games.gunsabsurd;
 import com.HidetoOzeki.games.gunsabsurd.gfx.Screen;
 import com.HidetoOzeki.games.gunsabsurd.InputHandler;
 public class Game {
